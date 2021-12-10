@@ -13,7 +13,7 @@ function hablar(event) {
     if (event) {
         event.preventDefault();
     }
-    document.querySelector("#hablar").className = "hablando";
+    document.querySelector("#hablar").className = "btn btn-outline-primary hablando";
     document.querySelector("#hablar").innerHTML = "Escuchando... Parar";
     escucha = new webkitSpeechRecognition();
     escucha.lang = "es-AR";
@@ -39,7 +39,7 @@ function hablar(event) {
 
 function pararDeHablar() {
     if (escucha) escucha.stop();
-    document.querySelector("#hablar").className = "";
+    document.querySelector("#hablar").className = "btn btn-outline-primary";
     document.querySelector("#hablar").innerHTML = "Hablar usando la Voz";
     escucha = null;
 }
