@@ -3,8 +3,8 @@
     "start_url": "./",
     "scope": "./",
     "display": "standalone",
-    "theme_color": "#dc6563",
-    "background_color": "antiquewhite",
+    "theme_color": "#ffffff",
+    "background_color": "white",
     "description": "Esta app te permite utilizar los servicios de reconocimiento de voz y de pronunciación de texto de tu dispositivo para que puedas charlar con quien quieras.",
     "icons": [
         {
@@ -23,17 +23,17 @@
     "screenshots": [
         {
             "src": "imagenes/screenshot1.png",
-            "sizes": "1080x2220",
+            "sizes": "862x1754",
             "type": "image/png"
         },
         {
             "src": "imagenes/screenshot2.png",
-            "sizes": "1080x2220",
+            "sizes": "862x1754",
             "type": "image/png"
         },
         {
             "src": "imagenes/screenshot3.png",
-            "sizes": "1080x2220",
+            "sizes": "862x1754",
             "type": "image/png"
         }
     ]
