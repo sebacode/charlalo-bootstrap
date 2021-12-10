@@ -1,3 +1,4 @@
+
 <!-- 
 Hola curioso o curiosa, ¿cómo estás?
 Bueno, éste es el simple código fuente de Chárlalo. Fue desarrollado en 1 hora, 34 minutos.
@@ -10,12 +11,12 @@ Cualquier duda o consulta, contactame por Twitter a @maxifirtman
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chárlalo - Pasa voz a texto y texto a voz</title>
-    <link rel="icon" href="imagenes/icono.png">
-    <!-- Estilos CSS -->
-    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="imagenes/icono.png?2">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="bootstrap.min.css">
     <!-- Meta datos para Progressive Web Apps -->
     <link rel="manifest" href="app.webmanifest">
-    <meta name="theme-color" content="#dc6563">
+    <meta name="theme-color" content="#ffffff">
     <!-- Scripts de la aplicación -->
     <script src="scripts/charlalo.js" defer></script>
     <script src="scripts/recognition.js" defer></script>
@@ -23,72 +24,119 @@ Cualquier duda o consulta, contactame por Twitter a @maxifirtman
     <script src="scripts/camera.js" defer></script>
     <!-- Soporte de icono y splash screen automático para iOS -->
     <script async src="https://cdn.jsdelivr.net/npm/pwacompat" crossorigin="anonymous"></script>
-
 </head>
 <body>
-    <header>
-        <h1><img src="imagenes/charlalo_titulo.svg" alt="Chárlalo" width="100%"></h1>
-        <button id="instalar" onclick="instalar()">Instalar</button>
-        <nav>
-            <ul>
-                <li><a href="javascript:ir('charla')">Charla</a></li>
-                <li><a href="javascript:ir('pictogramas')">Pictogramas</a></li>
-                <li><a href="javascript:ir('camara')">Cámara</a></li>
-                <li><a href="javascript:ir('ayuda')">?</a></li>
-            </ul>
-        </nav>
-    </header>
-    <!-- Los hijos directo de <main> son las secciones/rutas de la App -->
-    <main>
-        <article id="charla">
-            <h2>Modo Charla</h2>
-            <button id="limpiar" onclick="limpiar()">🗑 Limpiar charla</button>
-            <ul id="mensajes"></ul>
-            <textarea id="mensajeEscrito"></textarea>
-            <section>
-                <button onclick="confirmar()">Confirmar Texto</button>
-                <button id="hablar">Hablar usando la Voz</button>
-            </section>
-        </article>
+	<div class="container">
 
-        <article id="pictogramas">
-            <h2>Modo Pictogramas</h2>
-            <h3>Emergencias</h3>
-            <ul>                
-            </ul>
-            <footer>
-                <p>
-                    The pictographic symbols used are the property of the Government of Aragón and have been created by Sergio Palao for ARASAAC (http://www.arasaac.org), that distributes them under Creative Commons License BY-NC-SA.
-                    Pictograms author: Sergio Palao. Origin: ARASAAC (http://www.arasaac.org). License: CC (BY-NC-SA). Owner: Government of Aragon (Spain)
-                </p>
-            </footer>
-        </article>
+		<header class="d-flex flex-wrap justify-content-center py-3 border-bottom">
+			<div class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none border-0 bg-white">
+				<svg xmlns="http://www.w3.org/2000/svg" width="40" height="32" fill="currentColor" class="bi bi-soundwave" viewBox="0 0 16 16">
+					<path fill-rule="evenodd" d="M8.5 2a.5.5 0 0 1 .5.5v11a.5.5 0 0 1-1 0v-11a.5.5 0 0 1 .5-.5zm-2 2a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zm4 0a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zm-6 1.5A.5.5 0 0 1 5 6v4a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm8 0a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm-10 1A.5.5 0 0 1 3 7v2a.5.5 0 0 1-1 0V7a.5.5 0 0 1 .5-.5zm12 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0V7a.5.5 0 0 1 .5-.5z"></path>
+				</svg>
+				<span class="fs-3">
+					<strong>Ch&aacute;rlalo</strong>
+				</span>
+				<sup class="px-2">
+					<button class="btn p-1 btn-sm btn-warning shadow-sm" id="instalar" onclick="instalar()" style="display:none;">Instalar</button>
+				</sup>
+			</div>
+			<ul class="nav nav-pills">
+				<li class="nav-item"><a class="nav-link" id="nav_charla" href="javascript:ir('charla')">Charla</a></li>
+				<li class="nav-item"><a class="nav-link" id="nav_pictogramas" href="javascript:ir('pictogramas')">Pictogramas</a></li>
+				<li class="nav-item"><a class="nav-link" id="nav_camara" href="javascript:ir('camara')">Cámara</a></li>
+				<li class="nav-item"><a class="nav-link" id="nav_ayuda" href="javascript:ir('ayuda')">?</a></li>
+		  	</ul>
+		</header>
 
-        <article id="camara">
-            <h2>Modo Cámara</h2>
+		<!-- Los hijos directo de <main> son las secciones/rutas de la App -->
+		<main>		
+			<article class="p-3 mb-4 bg-light rounded-3 shadow d-none" id="charla">
+				<div class="container-fluid py-4">
+					<h2 class="display-5 fw-bold text-primary">Modo Charla</h2>
+					<div class="row">
+						<p class="col-md-8 fs-4">
+							<div class="mb-3">
+								<button class="btn btn-sm border-0 text-secondary" id="limpiar" onclick="limpiar()">
+								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+								<path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+								<path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+								</svg>
+								Limpiar charla
+								</button>
+							</div>
+							<div class="mb-3">
+								<ul class="list-group" id="mensajes"></ul>
+							</div>
+							<div class="mb-3">
+								<textarea class="form-control" id="mensajeEscrito" rows="3" placeholder="Ingresar texto..."></textarea>
+							</div>
+						</p>
+					</div>
+					<div class="row">
+						<div class="col-md-6 col-12 mb-2">
+							<div class="d-grid gap-2">
+								<button class="btn btn-primary" type="button" onclick="confirmar()">Confirmar Texto</button>
+							</div>
+						</div>
+						<div class="col-md-6 col-12 mb-2">
+							<div class="d-grid gap-2">
+								<button class="btn btn-outline-primary" id="hablar" type="button">Hablar usando la Voz</button>
+							</div>
+						</div>
+					</div>
 
-            <section>
-                <button onclick="abrirCamara()">Abrir Cámara</button>
-                <video id="video">Cámara no disponible.</video>
-                <button onclick="sacarFoto()">Leer textos de la Cámara</button>
-            </section>
-            <output></output>
-        </article>
+				</div>
+			</article>
 
-        <article id="ayuda">
-            <h2>Ayuda Chárlalo v.0.1</h2>
-            <p>Esta app te permite utilizar los servicios de reconocimiento de voz y de pronunciación de texto de tu dispositivo para que puedas charlar con quien quieras. Por supuesto que esta app NO tiene ninguna patente y es de libre distribución; no almacena ningún dato, ni requiere de que te registres. </p>
-            <p>Podés instalarla en tu teléfono o computadora y funcionará como app usando "Instalar" o "Agregar a Inicio" del menú de tu navegador. No todas las funciones estarán habilitadas en todos los teléfonos. </p>
-            <p>Activá el sonido de tu parlante y si estás en Android y no escuchás, fijate en Ajustes que tengas activada la opción "Text to Speech" o "Salida de Texto a Voz" con una voz en tu idioma instalada.</p>
-            <p>Para el uso de la cámara, en esta versión, se recomienda Chrome en Android y habilitar "Experimental Web Features" si vas a chrome://flags mientras la funcionalidad esté en experimentación.</p>
+			<article  class="p-3 mb-4 bg-light rounded-3 shadow d-none" id="pictogramas">
+				<div class="container-fluid py-4">
+					<h2 class="display-5 fw-bold text-primary">Modo Pictogramas</h2>
+					<h3>Emergencias</h3>
+					<ul class="list-group mb-3" >
+					</ul>
+					<footer>
+						<p>
+							The pictographic symbols used are the property of the Government of Aragón and have been created by Sergio Palao for ARASAAC (http://www.arasaac.org), that distributes them under Creative Commons License BY-NC-SA.
+							Pictograms author: Sergio Palao. Origin: ARASAAC (http://www.arasaac.org). License: CC (BY-NC-SA). Owner: Government of Aragon (Spain)
+						</p>
+					</footer>
+				</div>
+			</article>
 
-            <p>Info de licencias usadas: The pictographic symbols used are the property of the Government of Aragón and have been created by Sergio Palao for ARASAAC (http://www.arasaac.org), that distributes them under Creative Commons License BY-NC-SA.
-                Pictograms author: Sergio Palao. Origin: ARASAAC (http://www.arasaac.org). License: CC (BY-NC-SA). Owner: Government of Aragon (Spain).
-           </p>
-           <p>Software libre bajo licencia GPL v3 GNU (General Public License). <a href="https://github.com/firtman/charlalo">Ver código fuente</a>. Creado por <a href="https://firt.dev">Maximiliano Firtman</a> (<a href="https://twitter.com/firt">@firt</a> <a href="https://twitter.com/maxifirtman">@maxifirtman)</a></p>
-           <p>Reporte de bugs: <a href="http://twitter.com/maxifirtman">@maxifirtman</a> o en <a href="https://github.com/firtman/charlalo/issues">Github</a></p>
-        </article>
+			<article  class="p-3 mb-4 bg-light rounded-3 shadow d-none"  id="camara">
+				<div class="container-fluid py-4">
+					<h2 class="display-5 fw-bold text-primary">Modo Cámara</h2>
+					<section>
+						<button class="btn btn-primary mb-3" type="button" onclick="abrirCamara()">Abrir Cámara</button>
+						<video class="form-control" id="video">Cámara no disponible.</video>
+						<button class="btn btn-primary mt-3" type="button" onclick="sacarFoto()">Leer textos de la Cámara</button>
+					</section>
+					<output></output>
+				</div>
+			</article>
 
-    </main>
+			<article class="p-3 mb-4 bg-light rounded-3 shadow d-none" id="ayuda">
+				<div class="container-fluid py-4">
+					<p class="alert alert-warning">Esta web app se origin&oacute; en base a Chárlalo v.0.1 con la única diferencia que se le aplic&oacute; otro diseño, para m&aacute;s info del proyecto original leer lo siguiente...</p>
+					<h2>Ayuda Chárlalo v.0.1</h2>
+					<p>Esta app te permite utilizar los servicios de reconocimiento de voz y de pronunciación de texto de tu dispositivo para que puedas charlar con quien quieras. Por supuesto que esta app NO tiene ninguna patente y es de libre distribución; no almacena ningún dato, ni requiere de que te registres. </p>
+					<p>Podés instalarla en tu teléfono o computadora y funcionará como app usando "Instalar" o "Agregar a Inicio" del menú de tu navegador. No todas las funciones estarán habilitadas en todos los teléfonos. </p>
+					<p>Activá el sonido de tu parlante y si estás en Android y no escuchás, fijate en Ajustes que tengas activada la opción "Text to Speech" o "Salida de Texto a Voz" con una voz en tu idioma instalada.</p>
+					<p>Para el uso de la cámara, en esta versión, se recomienda Chrome en Android y habilitar "Experimental Web Features" si vas a chrome://flags mientras la funcionalidad esté en experimentación.</p>
+
+					<p>Info de licencias usadas: The pictographic symbols used are the property of the Government of Aragón and have been created by Sergio Palao for ARASAAC (http://www.arasaac.org), that distributes them under Creative Commons License BY-NC-SA.
+						Pictograms author: Sergio Palao. Origin: ARASAAC (http://www.arasaac.org). License: CC (BY-NC-SA). Owner: Government of Aragon (Spain).
+				   </p>
+				   <p>Software libre bajo licencia GPL v3 GNU (General Public License). <a href="https://github.com/firtman/charlalo">Ver código fuente</a>. Creado por <a href="https://firt.dev">Maximiliano Firtman</a> (<a href="https://twitter.com/firt">@firt</a> <a href="https://twitter.com/maxifirtman">@maxifirtman)</a></p>
+				   <p>Reporte de bugs: <a href="http://twitter.com/maxifirtman">@maxifirtman</a> o en <a href="https://github.com/firtman/charlalo/issues">Github</a></p>
+			   </div>
+			</article>
+
+		</main>
+
+		<footer class="py-3 my-4">
+			<p class="text-muted text-center">2021 Ch&aacute;rlalo</p>
+		</footer>
+	</div>
 </body>
 </html>
