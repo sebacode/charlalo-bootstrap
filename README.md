@@ -1,6 +1,4 @@
-# charlalo
-Proyecto Chárlalo, una rápida app (PWA) que permite usar los servicios de Text-to-Speech y Speech Recognition de tu dispositivo.
+# charlalo-bootstrap
+Charlalo Bootstrap es una modificación del proyecto [https://github.com/firtman/charlalo](https://github.com/firtman/charlalo) que solo varia en su diseño.
 
-Mirá la presentación del proyecto en [YouTube](https://youtu.be/-DJJJKQL6AM).
-
-Probá la app desde tu computadora o celular en [Charlalo.app](https://charlalo.app]), está publicado allí este mismo código fuente.
+Probá la app desde tu computadora o celular en [Charlalo.web.app](https://charlalo.web.app]), está publicado allí este mismo código fuente.
